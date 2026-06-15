@@ -1,35 +1,60 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { View, Text } from 'react-native'
+import React from 'react'
+import { Tabs } from 'expo-router'
+import { Ionicons } from "@expo/vector-icons";
+import AntDesign from '@expo/vector-icons/AntDesign'; // Icones Vetores de alguém de fora "AntDesign"
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+// Tudo abaixo é definir o estilo do Tab Navigator, que são as opções que aparecem em baixopara selecionar para ir para em outra página
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+// "<Tabs></Tabs>" é a "criação" do Tab Navigator
 
+// "screenOptions" é auto-explicativo
+
+// "<Tab.Screen/>" é cada opção individualmente, sendo o "name" é o nome do arquivo que ele vai seguir para ir, enquanto na parte de "options" e "title" é para definir o que será escrito
+
+const TabsLayout = () => {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
-      <Tabs.Screen
-        name="index"
+    <Tabs 
+        screenOptions={{
+            tabBarActiveTintColor: "#66c0f4",
+            tabBarInactiveTintColor: "#c7d5e0",
+            tabBarStyle: {
+                backgroundColor: "#2a475e",
+                height: 90,
+            },
+            tabBarLabelStyle: {
+                fontSize: 12,
+                fontWeight: "600",
+            },
+            headerShown: false, 
+        }}>
+        <Tabs.Screen
+        name='index'
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
+            title: "",
+            tabBarIcon: ({color,size}) => (
+                <AntDesign name="shopping" size={size} color={color} />
+            )
+        }}/>
+        <Tabs.Screen
+        name='auth'
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
+            title: "",
+            tabBarIcon: ({color,size}) => (
+                <FontAwesome6 name="shield" size={size} color={color} />
+            )
+        }}/>
+        <Tabs.Screen
+        name='settings'
+        options={{
+            title: "",
+            tabBarIcon: ({color,size}) => (
+                <Ionicons name='settings-outline' size={size} color={color}/>
+            )
+        }}/>
     </Tabs>
-  );
+  )
 }
+
+export default TabsLayout
